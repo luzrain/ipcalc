@@ -4,7 +4,7 @@
 
 Install with composer:
 ```
-composer require "luzrain/ipcalc:~1.0"
+composer require "luzrain/ipcalc:~1.0.0"
 ```
 
 ## Basic usage

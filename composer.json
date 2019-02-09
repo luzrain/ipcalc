@@ -4,9 +4,7 @@
     "keywords": ["ipv6", "ipv4", "network", "subnet", "cidr", "IP", "dtr"],
     "license": "MIT",
     "autoload": {
-        "psr-4": {
-            "IPCalc\\": "src/"
-        }
+        "classmap": ["IP.php"]
     },
     "require": {
         "php": ">=5.1"

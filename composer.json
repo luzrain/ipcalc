@@ -10,5 +10,6 @@
     },
     "require": {
         "php": ">=5.1"
-    }
+    },
+    "minimum-stability": "dev"
 }

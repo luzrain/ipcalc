@@ -1,8 +1,19 @@
 # IPv4/IPv6 network calculator for PHP
 
+## Installation
+
+Install with composer:
+```
+composer require "luzrain/ipcalc:~1.0"
+```
+
+## Basic usage
+
 This class takes both IPv6 and IPv4 addresses into consideration.
 You can create the class by passing an IP and CIDR mask one of two ways:
 ```
+require 'vendor/autoload.php';
+
 $net = new IPCalc\IP('fe80:dead:15:a:bad:1dea:11:2234/93');
 // or
 $net = new IPCalc\IP('fe80:dead:15:a:bad:1dea:11:2234', 93);

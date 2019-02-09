@@ -7,7 +7,7 @@ namespace IPCalc;
 
 class IP {
     
-    private $version;
+    private $version = null;
     private $ip;
     private $cidr;
     private $ip_long;
@@ -20,7 +20,7 @@ class IP {
             $this->cidr = (int)substr($ip, $cidrpos+1);
         } else {
             $this->ip = $ip;
-            $this->cidr = $cidr;
+            $this->cidr = (int)$cidr;
         }
             
         /** Detect if it is a valid IPv4 Address **/
@@ -28,6 +28,7 @@ class IP {
             if($this->cidr === null || $this->cidr < 0 || $this->cidr > 32) $this->cidr = 32;
             $this->version = 4;
             $this->netmask_v4();
+            $this->ip_long = $this->Ip2Bin($this->ip);
         }
         
         /** Detect if it is a valid IPv6 Address **/
@@ -35,9 +36,8 @@ class IP {
             if($this->cidr === null || $this->cidr < 0 || $this->cidr > 128) $this->cidr = 128;
             $this->version = 6;
             $this->netmask_v6();
+            $this->ip_long = $this->Ip2Bin($this->ip);
         }
-        
-        $this->ip_long = $this->Ip2Bin($this->ip);
     }
     
     public function __toString() {
@@ -103,23 +103,27 @@ class IP {
     
     // Return Netmask in printable format
     public function getNetmask() {
+        if(is_null($this->version)) return null;
         return $this->Bin2Ip($this->netmask_long);
     }
     
     // Return network
     public function getNetwork() {
+        if(is_null($this->version)) return null;
         $network = $this->ip_long & $this->netmask_long;
         return $this->Bin2Ip($network);
     }
     
     // Return Broadcast
     public function getBroadcast() {
+        if(is_null($this->version)) return null;
         $broadcast = $this->ip_long | ~$this->netmask_long;
         return $this->Bin2Ip($broadcast);
     }
     
     // Return min ip adress
     public function getHostMin() {
+        if(is_null($this->version)) return null;
         $hostmin = $this->ip_long & $this->netmask_long;
         $ip = $this->Bin2Ip($hostmin);
         if($this->version == 4) $ip = long2ip(ip2long($ip)+1);
@@ -128,6 +132,7 @@ class IP {
     
     // Return max ip adress
     public function getHostMax() {
+        if(is_null($this->version)) return null;
         $hostmax = $this->ip_long | ~$this->netmask_long;
         $ip = $this->Bin2Ip($hostmax);
         if($this->version == 4) $ip = long2ip(ip2long($ip)-1);

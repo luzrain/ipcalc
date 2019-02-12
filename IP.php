@@ -20,7 +20,7 @@ class IP {
             $this->cidr = (int)substr($ip, $cidrpos+1);
         } else {
             $this->ip = $ip;
-            $this->cidr = (int)$cidr;
+            $this->cidr = $cidr;
         }
             
         /** Detect if it is a valid IPv4 Address **/

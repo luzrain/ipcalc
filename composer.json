@@ -1,12 +1,33 @@
 {
     "name": "luzrain/ipcalc",
-    "description": "IPv4/IPv6 network calculator for PHP",
-    "keywords": ["ipv6", "ipv4", "network", "subnet", "cidr", "IP", "dtr"],
+    "description": "IPv4/IPv6 Network calculator for PHP",
+    "keywords": [
+        "ipv6",
+        "ipv4",
+        "network",
+        "subnet",
+        "cidr",
+        "IP",
+        "calculator",
+        "dtr"
+    ],
+    "homepage": "https://github.com/luzrain/ipcalc",
+    "type": "library",
     "license": "MIT",
-    "autoload": {
-        "classmap": ["IP.php"]
-    },
     "require": {
-        "php": ">=5.1"
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "IPCalc\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IPCalc\\Test\\": "tests/"
+        }
     }
 }

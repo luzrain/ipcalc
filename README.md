@@ -1,50 +1,39 @@
-# IPv4/IPv6 network calculator for PHP
+# 🌐 IPv4/IPv6 Network calculator for PHP
+
+[![PHP >=8.0](https://img.shields.io/badge/PHP->=8.0-777bb3.svg?style=flat)](https://www.php.net/releases/8.0/en.php)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/luzrain/ipcalc/tests.yaml?branch=master)](../../actions/workflows/tests.yaml)
+
+This IP Network Calculator library supports both IPv4 and IPv6, offering functionality to compute usable host ranges, retrieve subnet masks, and determine whether a given IP address belongs to a specific network.
 
 ## Installation
 
 Install with composer:
-```
-composer require "luzrain/ipcalc:~1.0.0"
+```bash
+$ composer require luzrain/ipcalc
 ```
 
-## Basic usage
+## Usage
 
-This class takes both IPv6 and IPv4 addresses into consideration.
-You can create the class by passing an IP and CIDR mask one of two ways:
-```
-require 'vendor/autoload.php';
 
-$net = new IPCalc\IP('fe80:dead:15:a:bad:1dea:11:2234/93');
+Create IPCalc\IP instance
+```php
+$net = new IPCalc\IP('192.168.1.1/24');
 // or
-$net = new IPCalc\IP('fe80:dead:15:a:bad:1dea:11:2234', 93);
+$net = new IPCalc\IP('192.168.1.1', 24);
 ```
-You can then access different aspects of a network:
-```
-$net->getVersion();    // 6                                  # IP version
-$net->getIp();         // fe80:dead:15:a:bad:1dea:11:2234    # Actual IP address
-$net->getCidr()        // 93                                 # Cidr prefix
-$net->getNetmask()     // ffff:ffff:ffff:ffff:ffff:fff8::    # Netmask in printable format
-$net->getNetwork()     // fe80:dead:15:a:bad:1de8::          # Address of current IP network (for ipv4)
-$net->getBroadcast()   // fe80:dead:15:a:bad:1def:ffff:ffff  # Broadcast address of network (for ipv4)
-$net->getHostMin()     // fe80:dead:15:a:bad:1de8::          # First IP adress
-$net->getHostMax()     // fe80:dead:15:a:bad:1def:ffff:ffff  # Last IP adress
-```
-There is a `__toString()` method which will return a JSON-encoded string on the class object:
-```
-echo new IPCalc\IP('192.168.1.10/24');
-```
-The above would return:
-```
-{
-    "version":4,
-    "ip":"192.168.1.10",
-    "cidr":24,
-    "netmask":"255.255.255.0",
-    "network":"192.168.1.0",
-    "broadcast":"192.168.1.255",
-    "hostmin":"192.168.1.1",
-    "hostmax":"192.168.1.254"
-}
+
+You can then retrieve various properties of the network:
+```php
+$net->getIp();                  // 192.168.1.1    // The original IP address
+$net->getNetmask();             // 255.255.255.0  // Subnet mask
+$net->getCidr();                // 24             // CIDR prefix length
+$net->getVersion();             // 4              // IP version (4 or 6)
+$net->isPrivate();              // true           // Returns true if the IP address is in a private range
+$net->getNetwork();             // 192.168.1.0    // Network address of the subnet (IPv4 only)
+$net->getBroadcast();           // 192.168.1.255  // Broadcast address of the network (IPv4 only)
+$net->getHostMin();             // 192.168.1.1    // First usable IP address in the subnet
+$net->getHostMax();             // 192.168.1.254  // Last usable IP address in the subnet
+$net->contains('192.168.1.10'); // true           // Returns true if the given IP address is within the network
 ```
 
 #### Notes:

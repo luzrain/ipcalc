@@ -102,13 +102,11 @@ final class IP implements \JsonSerializable
 
         foreach (self::PRIVATE_SUBNETS as $subnet) {
             if ((new self($subnet))->contains($this->ip)) {
-                $this->private = true;
-                return true;
+                return $this->private = true;
             }
         }
 
-        $this->private = false;
-        return false;
+        return $this->private = false;
     }
 
     public function getNetwork(): string

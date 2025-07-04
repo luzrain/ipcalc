@@ -1,7 +1,8 @@
 # 🌐 IPv4/IPv6 Network calculator for PHP
 
-[![PHP >=8.0](https://img.shields.io/badge/PHP->=8.0-777bb3.svg?style=flat)](https://www.php.net/releases/8.0/en.php)
-[![Tests Status](https://img.shields.io/github/actions/workflow/status/luzrain/ipcalc/tests.yaml?branch=master)](../../actions/workflows/tests.yaml)
+![PHP >=8.0](https://img.shields.io/badge/PHP->=8.0-777bb3.svg?style=flat)
+![Tests Status](https://img.shields.io/github/actions/workflow/status/luzrain/ipcalc/tests.yaml?branch=main&label=Tests)
+![Downloads](https://img.shields.io/packagist/dt/luzrain/ipcalc?label=Downloads&color=f28d1a)
 
 This IP Network Calculator library supports both IPv4 and IPv6, offering functionality to compute usable host ranges, retrieve subnet masks, and determine whether a given IP address belongs to a specific network.
 
@@ -13,7 +14,6 @@ $ composer require luzrain/ipcalc
 ```
 
 ## Usage
-
 
 Create IPCalc\IP instance
 ```php
